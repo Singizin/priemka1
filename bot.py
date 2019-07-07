@@ -8,12 +8,10 @@ from check import now
 fma1 = 'https://www.nstu.ru/enrollee/entrance/entrance_list?competition=4397'  # Энергетика
 fen1 = 'https://www.nstu.ru/enrollee/entrance/entrance_list?competition=4414'  # Энергетика
 fma3 = 'https://www.nstu.ru/enrollee/entrance/entrance_list?competition=4399'  # Автоматизация
-proxy = '78.186.140.120:58177'
-#apihelper.proxy = {'https': 'https://{}'.format(proxy)}
-# TOKEN = '747611758:AAEpFP3iLMCbtmrLF0omSyTnjP7d7CCIaPY'
+
 TOKEN = '854025714:AAH9Wi3_rWfVJvjnbDgNWkL8hYCbH2Fr-wY'
 bot = telebot.TeleBot(TOKEN)
-i = 0
+print('lololo')
 bot.send_message(260119686, "Go")
 
 
@@ -75,7 +73,7 @@ def echo_digits(message: Message):
     bot.send_message(260119686, "{}".format(otvet))
 '''
 
-bot.enable_save_reply_handlers(delay=1)
+# bot.enable_save_reply_handlers(delay=1)
 
 
 bot.polling(timeout=60)
