@@ -77,11 +77,5 @@ def echo_digits(message: Message):
 
 bot.enable_save_reply_handlers(delay=1)
 
-while True:
-    try:
-        bot.polling()
-    except Exception as e:
-        apihelper.proxy = {'https': 'https://{}'.format(proxy)}
-        TOKEN = '854025714:AAH9Wi3_rWfVJvjnbDgNWkL8hYCbH2Fr-wY'
-        bot = telebot.TeleBot(TOKEN)
-        continue
+
+bot.polling(timeout=60)
