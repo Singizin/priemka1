@@ -43,26 +43,37 @@ def name(m):
 
 
 def spisok(m):
-    print(m.text)
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    keyboard.add('копии', 'оригиналы')
-    keyboard.add('контракт', 'ориг+согсасие')
     if m.text == '13.03.02':
+        user.update({m.chat.id : '1'})
+        keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        keyboard.add('копии', 'оригиналы')
+        keyboard.add('контракт', 'ориг+согсасие')
+        msg = bot.send_message(m.chat.id, 'какой список?', reply_markup=keyboard)
+        bot.register_next_step_handler(msg, zapros)
+    elif m.text == '15.03.04':
+        user.update({m.chat.id : '2'})
         keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
         keyboard.add('копии', 'оригиналы')
         keyboard.add('контракт', 'ориг+согсасие')
         msg = bot.send_message(m.chat.id, 'какой список?', reply_markup=keyboard)
         bot.register_next_step_handler(msg, zapros)
 
-
-# def zapros(m):
-#     if m.text == 'копии':
-#         bot.send_message(m.chat.id, now(url))
-#     elif m.text == 'оригиналы':
-#         bot.send_message(m.chat.id, now(url + '&o_only=1'))
-#     # bot.send_message(call.from_user.id, now(fma3))
-
-
+def zapros(m):
+    if user.get(m.chat.id) == '1':
+        url = fma1
+    elif user.get(m.chat.id) == '2':
+        url = fma3
+    if m.text == 'копии':
+        bot.send_message(m.chat.id, now(url))
+    elif m.text == 'оригиналы':
+        bot.send_message(m.chat.id, now(url + '&o_only=1'))
+    elif m.text == 'ориг+согласие':
+        bot.send_message(m.chat.id, now(url + '&o_only=2'))
+    elif m.text == 'контракт':
+        bot.send_message(m.chat.id, now(url + '&o_only=3'))
+    user.update({m.chat.id:'0'})
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard.add('/fen', '/check')
 
 @bot.message_handler(content_types=['text'])
 @bot.edited_message_handler(content_types=['text'])
