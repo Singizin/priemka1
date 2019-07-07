@@ -62,19 +62,24 @@ def spisok(m):
 def zapros(m):
     if user.get(m.chat.id) == '1':
         url = fma1
+        napr ='#энергетика'
     elif user.get(m.chat.id) == '2':
         url = fma3
+        napr ='#автоматизация'
     if m.text == 'копии':
+        bot.send_message(m.chat.id, "{} копии:".format(napr))
         bot.send_message(m.chat.id, now(url))
     elif m.text == 'оригиналы':
+        bot.send_message(m.chat.id, "{} оригиналы:".format(napr))
         bot.send_message(m.chat.id, now(url + '&o_only=1'))
     elif m.text == 'ориг+согласие':
+        bot.send_message(m.chat.id, "{} огириналы+согласие".format(napr))
         bot.send_message(m.chat.id, now(url + '&o_only=2'))
     elif m.text == 'контракт':
+        bot.send_message(m.chat.id, "{} контракт".format(napr))
         bot.send_message(m.chat.id, now(url + '&o_only=3'))
     user.update({m.chat.id:'0'})
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    keyboard.add('/fen', '/check')
+    bot.send_message(m.chat.id, "/fen \n /check")
 
 @bot.message_handler(content_types=['text'])
 @bot.edited_message_handler(content_types=['text'])
