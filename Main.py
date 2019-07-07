@@ -63,7 +63,7 @@ def spisok(m):
 #     # bot.send_message(call.from_user.id, now(fma3))
 
 
-'''
+
 @bot.message_handler(content_types=['text'])
 @bot.edited_message_handler(content_types=['text'])
 def echo_digits(message: Message):
@@ -71,7 +71,7 @@ def echo_digits(message: Message):
     otvet = a(1, fma1, old)
     print(otvet)
     bot.send_message(260119686, "{}".format(otvet))
-'''
+
 
 # bot.enable_save_reply_handlers(delay=1)
 
