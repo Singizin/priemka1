@@ -13,7 +13,7 @@ TOKEN = '854025714:AAH9Wi3_rWfVJvjnbDgNWkL8hYCbH2Fr-wY'
 bot = telebot.TeleBot(TOKEN)
 print('lololo')
 bot.send_message(260119686, "Go")
-
+global user = {}
 
 @bot.message_handler(commands=['fen'])
 def command_handler(message: Message):
