@@ -26,8 +26,8 @@ def command_handler(message: Message):
 @bot.message_handler(commands=['check'])
 def start(m):
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    keyboard.add('Направления', 'Прайс-лист')
-    keyboard.add('Акции', 'Контакты')
+    keyboard.add('Направления')
+    keyboard.add('/fen', '/check')
     msg = bot.send_message(m.chat.id, 'Выберите функцию',
                            reply_markup=keyboard)
     bot.register_next_step_handler(msg, name)
