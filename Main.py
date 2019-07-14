@@ -15,6 +15,10 @@ bot.send_message(260119686, "Go")
 global user
 user = {}
 
+keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+keyboard.add('/fen', '/check')
+
+
 @bot.message_handler(commands=['fen'])
 def command_handler(message: Message):
     count, spisok = a(2)
@@ -58,6 +62,7 @@ def spisok(m):
         msg = bot.send_message(m.chat.id, 'какой список?', reply_markup=keyboard)
         bot.register_next_step_handler(msg, zapros)
 
+
 def zapros(m):
     if user.get(m.chat.id) == '1':
         url = fma1
@@ -66,23 +71,38 @@ def zapros(m):
         url = fma3
         napr ='#автоматизация'
     if m.text == 'копии':
-        bot.send_message(m.chat.id, "{}_копии,\n{}".format(napr, now(url)))
+        bot.send_message(m.chat.id, "{}_копии,{}".format(napr, now(url)))
     elif m.text == 'оригиналы':
-        bot.send_message(m.chat.id, "{}_оригиналы,\n{}".format(napr, now(url + '&o_only=1')))
+        bot.send_message(m.chat.id, "{}_оригиналы,{}".format(napr, now(url + '&o_only=1')))
     elif m.text == 'ориг+согласие':
-        bot.send_message(m.chat.id, "{}_огириналы+согласие\n".format(napr, now(url + '&o_only=2')))
+        bot.send_message(m.chat.id, "{}_огириналы+согласие,{}".format(napr, now(url + '&o_only=2')))
     elif m.text == 'контракт':
-        bot.send_message(m.chat.id, "{}_контракт\n{}".format(napr, now(url + '&o_only=3')))
+        bot.send_message(m.chat.id, "{}_контракт{}".format(napr, now(url + '&o_only=3')))
     user.update({m.chat.id:'0'})
     bot.send_message(m.chat.id, "/fen \n /check")
+    return
+
 
 @bot.message_handler(content_types=['text'])
 @bot.edited_message_handler(content_types=['text'])
 def echo_digits(message: Message):
     old = list(message.text.split(', '))
-    otvet = a(1, fma1, old)
-    print(otvet)
-    bot.send_message(260119686, "{}".format(otvet))
+    first = old[0].split('_')
+    if first[0] == '#энергетика':
+        url = fma1
+    elif first[0] == '#автоматизация':
+        url = fma3
+    if first[1] == 'копии':
+        pass
+    elif first[1] == 'оригиналы':
+        url = url + '&o_only=1'
+    elif first[1] == 'ориг+согласие':
+        url = url + '&o_only=2'
+    elif first[1] == 'контракт':
+        url = url + '&o_only=3'
+
+    otvet = a(1, url, old)
+    bot.send_message(message.chat.id, "{}".format(otvet))
 
 
 # bot.enable_save_reply_handlers(delay=1)
