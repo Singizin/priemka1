@@ -102,7 +102,8 @@ def echo_digits(message: Message):
         url = url + '&o_only=3'
 
     otvet = a(1, url, old)
-    bot.send_message(message.chat.id, "{}".format(otvet))
+    msg = bot.send_message(message.chat.id, "{}".format(otvet), reply_markup=keyboard)
+    bot.register_next_step_handler(msg, start)
 
 
 # bot.enable_save_reply_handlers(delay=1)
