@@ -71,13 +71,13 @@ def zapros(m):
         url = fma3
         napr ='#автоматизация'
     if m.text == 'копии':
-        bot.send_message(m.chat.id, "{}_копии,{}".format(napr, now(url)))
+        bot.send_message(m.chat.id, "{}_копии, {}".format(napr, now(url)))
     elif m.text == 'оригиналы':
-        bot.send_message(m.chat.id, "{}_оригиналы,{}".format(napr, now(url + '&o_only=1')))
+        bot.send_message(m.chat.id, "{}_оригиналы, {}".format(napr, now(url + '&o_only=1')))
     elif m.text == 'ориг+согласие':
-        bot.send_message(m.chat.id, "{}_огириналы+согласие,{}".format(napr, now(url + '&o_only=2')))
+        bot.send_message(m.chat.id, "{}_огириналы+согласие, {}".format(napr, now(url + '&o_only=2')))
     elif m.text == 'контракт':
-        bot.send_message(m.chat.id, "{}_контракт{}".format(napr, now(url + '&o_only=3')))
+        bot.send_message(m.chat.id, "{}_контракт, {}".format(napr, now(url + '&o_only=3')))
     user.update({m.chat.id:'0'})
     bot.send_message(m.chat.id, "/fen \n /check")
     return
