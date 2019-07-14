@@ -11,7 +11,6 @@ fma3 = 'https://www.nstu.ru/enrollee/entrance/entrance_list?competition=4399'  #
 
 TOKEN = '854025714:AAH9Wi3_rWfVJvjnbDgNWkL8hYCbH2Fr-wY'
 bot = telebot.TeleBot(TOKEN)
-print('lololo')
 bot.send_message(260119686, "Go")
 global user
 user = {}
@@ -67,17 +66,13 @@ def zapros(m):
         url = fma3
         napr ='#автоматизация'
     if m.text == 'копии':
-        bot.send_message(m.chat.id, "{} копии:".format(napr))
-        bot.send_message(m.chat.id, now(url))
+        bot.send_message(m.chat.id, "{}_копии,\n".format(napr),now(url))
     elif m.text == 'оригиналы':
-        bot.send_message(m.chat.id, "{} оригиналы:".format(napr))
-        bot.send_message(m.chat.id, now(url + '&o_only=1'))
+        bot.send_message(m.chat.id, "{}_оригиналы,\n".format(napr),now(url + '&o_only=1'))
     elif m.text == 'ориг+согласие':
-        bot.send_message(m.chat.id, "{} огириналы+согласие".format(napr))
-        bot.send_message(m.chat.id, now(url + '&o_only=2'))
+        bot.send_message(m.chat.id, "{}_огириналы+согласие\n".format(napr),now(url + '&o_only=2'))
     elif m.text == 'контракт':
-        bot.send_message(m.chat.id, "{} контракт".format(napr))
-        bot.send_message(m.chat.id, now(url + '&o_only=3'))
+        bot.send_message(m.chat.id, "{}_контракт\n".format(napr),now(url + '&o_only=3'))
     user.update({m.chat.id:'0'})
     bot.send_message(m.chat.id, "/fen \n /check")
 
