@@ -15,6 +15,9 @@ bot.send_message(260119686, "Go")
 global user
 user = {}
 
+keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+keyboard.add('/fen', '/check')
+
 
 @bot.message_handler(commands=['fen'])
 def command_handler(message: Message):
@@ -68,13 +71,13 @@ def zapros(m):
         url = fma3
         napr ='#автоматизация'
     if m.text == 'копии':
-        msg = bot.send_message(m.chat.id, "{}_копии, {}".format(napr, now(url)), reoly_markup = keyboard)
+        bot.send_message(m.chat.id, "{}_копии, {}".format(napr, now(url)))
     elif m.text == 'оригиналы':
-        msg = bot.send_message(m.chat.id, "{}_оригиналы, {}".format(napr, now(url + '&o_only=1')), reoly_markup = keyboard)
-    elif m.text == 'ориг+согсасие':
-        msg = bot.send_message(m.chat.id, "{}_ориг+согсасие, {}".format(napr, now(url + '&o_only=2')), reoly_markup = keyboard)
+        bot.send_message(m.chat.id, "{}_оригиналы, {}".format(napr, now(url + '&o_only=1')))
+    elif m.text == 'ориг+согласие':
+        bot.send_message(m.chat.id, "{}_огириналы+согласие, {}".format(napr, now(url + '&o_only=2')))
     elif m.text == 'контракт':
-        msg = bot.send_message(m.chat.id, "{}_контракт, {}".format(napr, now(url + '&o_only=3')), reoly_markup = keyboard)
+        bot.send_message(m.chat.id, "{}_контракт, {}".format(napr, now(url + '&o_only=3')))
     user.update({m.chat.id:'0'})
     bot.send_message(m.chat.id, "/fen \n /check")
     return
