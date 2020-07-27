@@ -7,3 +7,4 @@ html5lib
 BeautifulSoup4
 peewee
 json-api
+postgres
