@@ -1,3 +1,9 @@
 pyTelegramBotAPI
 urllib3
 html-table-parser-python3
+lxml
+pandas
+html5lib
+BeautifulSoup4
+peewee
+json-api

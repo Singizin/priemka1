@@ -4,28 +4,57 @@ from telebot import types
 from telebot import apihelper
 from check import answer as a
 from check import now
+from check import *
+from databaseHeroku import *
+fma1 = 'https://www.nstu.ru/entrance/admission_campaign/entrance/entrance_list?competition=4829'  # Энергетика
+fen1 = 'https://www.nstu.ru/entrance/admission_campaign/entrance/entrance_list?competition=4841'  # Энергетика
+fma3 = 'https://www.nstu.ru/entrance/admission_campaign/entrance/entrance_list?competition=4831'  # Автоматизация
 
-fma1 = 'https://www.nstu.ru/enrollee/entrance/entrance_list?competition=4397'  # Энергетика
-fen1 = 'https://www.nstu.ru/enrollee/entrance/entrance_list?competition=4414'  # Энергетика
-fma3 = 'https://www.nstu.ru/enrollee/entrance/entrance_list?competition=4399'  # Автоматизация
-
-TOKEN = '854025714:AAH9Wi3_rWfVJvjnbDgNWkL8hYCbH2Fr-wY'
+TOKEN = '747611758:AAEpFP3iLMCbtmrLF0omSyTnjP7d7CCIaPY'
 bot = telebot.TeleBot(TOKEN)
 bot.send_message(260119686, "Go")
 global user
 user = {}
 
 keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-keyboard.add('/fen', '/check')
+keyboard.add('/fen', '/check', '/escape')
 
 
-@bot.message_handler(commands=['fen'])
+@bot.message_handler(commands=['fma1check'])
+def fma1check(message: Message):
+    bot.send_message(message.from_user.id, find(parse(fma1), fma1Select()))
+
+@bot.message_handler(commands=['fma3check'])
+def fma3check(message: Message):
+    bot.send_message(message.from_user.id, find(parse(fma3), fma3Select()))
+
+@bot.message_handler(commands=['fen1check'])
+def fen1check(message: Message):
+    bot.send_message(message.from_user.id, find(parse(fen1), fen1Select()))
+
+@bot.message_handler(commands=['fma1update'])
+def fma1update(message: Message):
+    newFma1(parse(fma1))
+    bot.send_message(message.from_user.id, 'список для ФМА 13.03.02 обновлен')
+
+@bot.message_handler(commands=['fma3update'])
+def fma3update(message: Message):
+    newFma3(parse(fma3))
+    bot.send_message(message.from_user.id, 'список для ФМА 15.03.04 обновлен')
+
+@bot.message_handler(commands=['fen1update'])
+def fen1update(message: Message):
+    newFen1(parse(fen1))
+    bot.send_message(message.from_user.id, 'список для ФЭН 13.03.02 обновлен')
+
+
+@bot.message_handler(commands=['fenbezfma'])
 def command_handler(message: Message):
-    count, spisok = a(2)
+    count, spisok = a()
     bot.send_message(message.from_user.id, count)
     bot.send_message(message.from_user.id, spisok)
 
-
+'''
 @bot.message_handler(commands=['check'])
 def start(m):
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -104,7 +133,7 @@ def echo_digits(message: Message):
     otvet = a(1, url, old)
     msg = bot.send_message(message.chat.id, "{}".format(otvet), reply_markup=keyboard)
     bot.register_next_step_handler(msg, start)
-
+'''
 
 # bot.enable_save_reply_handlers(delay=1)
 

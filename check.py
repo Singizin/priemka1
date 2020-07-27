@@ -1,6 +1,8 @@
 import urllib.request
+import requests
 from html_table_parser import HTMLTableParser
-
+import pandas as pd
+import databaseHeroku
 
 def find(new, old):
     '''
@@ -49,33 +51,32 @@ def now(url):
 def url_get_contents(url):
     """ Opens a website and read its binary contents (HTTP Response Body) """
     req = urllib.request.Request(url=url)
-    f = urllib.request.urlopen(req)
+    f = requests.get(url).content.decode()
+    #print(f)
+    #f = f.content.decode()
     return f
 
 
 def parse(url):
     abit = []
-    xhtml = url_get_contents(url).read().decode('utf-8')
-    p = HTMLTableParser()
-    a = p.feed(xhtml)
-    new = list(p.tables)
-    del new[0]  # удалить окно поиска на сайте нгту
-    del new[0][0:3]  # удалить шапку талицы
-    # print(new[0])
-    # print(len(new[0]))
-    for i in new[0]:
-        #print(len(i))
-        abit.append(i[1] if len(i) > 1 else i[0])
+    xhtml = url_get_contents(url)
+    table = pd.read_html(xhtml)
+    df = table[0]
+    new = df.values.tolist()
+    del new[0]
+    flag = False
+    for i in new:
+        if i[1] == 'По конкурсу':
+            flag = True
+            continue
+        if i[1] == "Не выдержавшие вступительные испытания":
+            break
+        if flag:
+            abit.append(i[1] if len(i) > 1 else i[0])
     return abit
 
 
-def answer(method, url='', text=''):
-    if method == 1:
-        old = list(text)
-        new = parse(url)
-        return find(new, old)
-    if method == 2:
-        fma = parse('https://www.nstu.ru/enrollee/entrance/entrance_list?competition=4397')
-        fen = parse('https://www.nstu.ru/enrollee/entrance/entrance_list?competition=4414')
-        return net_fma(fen, fma)
-
+def answer():
+    fma = parse('https://www.nstu.ru/entrance/admission_campaign/entrance/entrance_list?competition=4829')  # Энергетика
+    fen = parse('https://www.nstu.ru/entrance/admission_campaign/entrance/entrance_list?competition=4841')
+    return net_fma(fen, fma)
