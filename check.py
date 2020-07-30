@@ -76,6 +76,19 @@ def parse(url):
     return abit
 
 
+def parseConsent(url):
+    abit = []
+    xhtml = url_get_contents(url)
+    table = pd.read_html(xhtml)
+    df = table[0]
+    new = df.values.tolist()
+    del new[0]
+    flag = True
+    for i in new:
+        if flag:
+            abit.append(i[1] if len(i) > 1 else i[0])
+    return abit
+
 def answer():
     fma = parse('https://www.nstu.ru/entrance/admission_campaign/entrance/entrance_list?competition=4829')  # Энергетика
     fen = parse('https://www.nstu.ru/entrance/admission_campaign/entrance/entrance_list?competition=4841')
