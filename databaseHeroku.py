@@ -134,3 +134,6 @@ def newFen1(abitList):
     AbitsFEN1.delete().execute()
     for i in abitList:
         AbitsFEN1(number='{}'.format(i)).save()
+        
+a=get_db().create_tables([AbitsFMA3consent])
+newFma3consent()
