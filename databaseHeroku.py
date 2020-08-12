@@ -108,6 +108,7 @@ def newFma1consent(abitList):
 def newFma3consent(abitList):
     AbitsFMA3consent.delete().execute()
     for i in abitList:
+        print(i)
         AbitsFMA3consent(number='{}'.format(i)).save()
 
 
