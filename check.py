@@ -86,6 +86,8 @@ def parseConsent(url):
     flag = True
     for i in new:
         if flag:
+            if i[1] == 'По конкурсу':
+                continue
             abit.append(i[1] if len(i) > 1 else i[0])
     return abit
 

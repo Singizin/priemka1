@@ -49,6 +49,14 @@ class AbitsFMA1consent(BaseModel):
         table_name = "abitsFMA1consent"
 
 
+class AbitsFMA3consent(BaseModel):
+    id = AutoField(null=False)
+    number = CharField(max_length=7, null=True, default=None)
+
+    class Meta:
+        table_name = "abitsFMA3consent"
+
+
 class AbitsFMA3(BaseModel):
     id = AutoField(null=False)
     number = CharField(max_length=7, null=True, default=None)
@@ -85,10 +93,22 @@ def fma1consentSelect():
         fma1.append(i.number)
     return fma1
 
+def fma3consentSelect():
+    query = AbitsFMA3consent.select(AbitsFMA3consent.number)
+    fma3 = []
+    for i in query:
+        fma3.append(i.number)
+    return fma3
+
 def newFma1consent(abitList):
     AbitsFMA1consent.delete().execute()
     for i in abitList:
         AbitsFMA1consent(number='{}'.format(i)).save()
+
+def newFma3consent(abitList):
+    AbitsFMA3consent.delete().execute()
+    for i in abitList:
+        AbitsFMA3consent(number='{}'.format(i)).save()
 
 
 def fma3Select():
