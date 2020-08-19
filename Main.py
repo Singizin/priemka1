@@ -28,6 +28,10 @@ def fma1check(message: Message):
 def fma1consent(message: Message):
     bot.send_message(message.from_user.id, find(parseConsent(fma1 + '&o_only=2'), fma1consentSelect()))
 
+@bot.message_handler(commands=['fma2consent'])
+def fma1consent(message: Message):
+    bot.send_message(message.from_user.id, find(parseConsent(fma2 + '&o_only=2'), fma2consentSelect()))
+
 @bot.message_handler(commands=['fma3check'])
 def fma3check(message: Message):
     bot.send_message(message.from_user.id, find(parse(fma3), fma3Select()))
@@ -67,6 +71,10 @@ def fen1update(message: Message):
     newFen1(parse(fen1))
     bot.send_message(message.from_user.id, 'список для ФЭН 13.03.02 обновлен')
 
+@bot.message_handler(commands=['fma2consentupdate'])
+def fma2consentupdate(message: Message):
+    newFma2consent(parseConsent(fma2 + '&o_only=2'))
+    bot.send_message(message.from_user.id, 'список для ФМА 13.03.02 ММРК обновлен согласия')
 
 @bot.message_handler(commands=['fenbezfma'])
 def command_handler(message: Message):
