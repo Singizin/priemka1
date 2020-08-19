@@ -9,6 +9,7 @@ from databaseHeroku import *
 fma1 = 'https://www.nstu.ru/entrance/admission_campaign/entrance/entrance_list?competition=4829'  # Энергетика
 fen1 = 'https://www.nstu.ru/entrance/admission_campaign/entrance/entrance_list?competition=4841'  # Энергетика
 fma3 = 'https://www.nstu.ru/entrance/admission_campaign/entrance/entrance_list?competition=4831'  # Автоматизация
+fma2 = 'https://www.nstu.ru/entrance/admission_campaign/entrance/entrance_list?competition=4830'  # Энергетика ммрк
 
 TOKEN = '747611758:AAEpFP3iLMCbtmrLF0omSyTnjP7d7CCIaPY'
 bot = telebot.TeleBot(TOKEN)
